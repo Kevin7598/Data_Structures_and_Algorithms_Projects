@@ -32,13 +32,18 @@ void insertion_sort(std::vector<T> &vector, Compare comp = std::less<T>()) {
 
 template<typename T, typename Compare>
 void selection_sort(std::vector<T> &vector, Compare comp = std::less<T>()) {
-  for (int i = 1; i < static_cast<int>(vector.size()); i++) {
-    int j = i;
-    while ((j > 0) && (comp(vector[j], vector[j - 1]))) {
-      swap(vector, j, j - 1);
-      j--;
+    int n = static_cast<int>(vector.size());
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (comp(vector[j], vector[minIndex])) {
+                minIndex = j;
+            }
+        }
+        if (minIndex != i) {
+            swap(vector,i, minIndex);
+        }
     }
-  }
 }
 
 template<typename T, typename Compare>
